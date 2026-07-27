@@ -15,7 +15,7 @@ def add_entry():
     cursor = conn.cursor()
 
     cursor.execute("""
-        INSERT INTO entries (data, horas_estudo_tecnologia, horas_estudo_teologia, foi_academia, leitura)
+        INSERT OR REPLACE INTO entries (data, horas_estudo_tecnologia, horas_estudo_teologia, foi_academia, leitura)
         VALUES (?, ?, ?, ?, ?)
     """, (hoje, horas_estudo_tecnologia, horas_estudo_teologia, foi_academia_int, leitura_int))
 

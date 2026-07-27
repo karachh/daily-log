@@ -1,23 +1,23 @@
 import sqlite3
 
-def init_db():
-    conn = sqlite3.connect("data.db")
+def init_db(caminho="data.db"):
+    conn = sqlite3.connect(caminho)
     cursor = conn.cursor()
-    
+
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS entries (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            data TEXT NOT NULL,
+            data TEXT NOT NULL UNIQUE,
             horas_estudo_tecnologia REAL,
             horas_estudo_teologia REAL,
             foi_academia INTEGER,
             leitura INTEGER
         )
     """)
-    
+
     conn.commit()
     conn.close()
-    print("Banco de dados criado com sucesso.")
+    print(f"Banco pronto em {caminho}")
 
 if __name__ == "__main__":
     init_db()

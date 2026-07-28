@@ -31,6 +31,7 @@ for i in range(DIAS):
     leitura = random.choice([1, 0])
     registros.append((dia.isoformat(), tecnologia, teologia, academia, leitura))
 
+cursor.execute("DELETE FROM entries")
 cursor.executemany("""
     INSERT OR REPLACE INTO entries (data, horas_estudo_tecnologia, horas_estudo_teologia, foi_academia, leitura)
     VALUES (?, ?, ?, ?, ?)

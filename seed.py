@@ -12,11 +12,11 @@ init_db(CAMINHO)
 conexao = sqlite3.connect(CAMINHO)
 cursor = conexao.cursor()
 
-hoje = date.today()
+DATA_FINAL = date(2026, 7, 27)
 registros = []
 
 for i in range(DIAS):
-    dia = hoje - timedelta(days=i)
+    dia = DATA_FINAL - timedelta(days=i)
     fim_de_semana = dia.weekday() >= 5
 
     if fim_de_semana:

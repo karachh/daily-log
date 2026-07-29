@@ -1,5 +1,6 @@
 import sqlite3
 import pandas as pd
+from datetime import date, timedelta
 
 CAMINHO = "data_dev.db"
 
@@ -18,14 +19,24 @@ df = pd.read_sql_query("""
 
 conexao.close()
 
-dias_esperados = (df["data"].max() - df["data"].min()).days + 1
-dias_registrados = len(df)
-buracos = dias_esperados - dias_registrados
+DATA_FINAL = date(2026, 7, 27)
+DIAS_JANELA = 21
 
-if buracos > 0:
-    print(f"Atenção: {buracos} dia(s) sem registro no período.")
+esperado = pd.date_range(
+    start=DATA_FINAL - timedelta(days=DIAS_JANELA - 1),
+    end=DATA_FINAL,
+    freq="D"
+)
+
+registrado = pd.DatetimeIndex(df["data"])
+faltando = esperado.difference(registrado)
+
+if len(faltando) > 0:
+    print(f"ATENCAO: {len(faltando)} dia(s) sem registro na janela de {DIAS_JANELA} dias:")
+    for dia in faltando:
+        print(f"  - {dia.date()}")
 else:
-    print("Período completo, sem buracos.")
+    print(f"Janela de {DIAS_JANELA} dias completa.")
 print()
 
 print(f"Linhas: {len(df)}  |  Periodo: {df['data'].min().date()} a {df['data'].max().date()}")

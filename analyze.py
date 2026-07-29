@@ -18,6 +18,16 @@ df = pd.read_sql_query("""
 
 conexao.close()
 
+dias_esperados = (df["data"].max() - df["data"].min()).days + 1
+dias_registrados = len(df)
+buracos = dias_esperados - dias_registrados
+
+if buracos > 0:
+    print(f"Atenção: {buracos} dia(s) sem registro no período.")
+else:
+    print("Período completo, sem buracos.")
+print()
+
 print(f"Linhas: {len(df)}  |  Periodo: {df['data'].min().date()} a {df['data'].max().date()}")
 print()
 

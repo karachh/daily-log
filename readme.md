@@ -119,7 +119,6 @@ justifica isso; em volume maior, o `GROUP BY` deveria rodar dentro do banco.
   não para concluir nada.
 - **Sem agendamento.** A execução é manual, e não existe lembrete — a coleta
   depende inteiramente de disciplina.
-- **PNG gerado não está no `.gitignore`.** É artefato de saída, não código-fonte.
 
 ## Contexto
 
